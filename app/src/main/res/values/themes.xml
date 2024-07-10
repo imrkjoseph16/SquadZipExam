@@ -28,4 +28,11 @@
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
     </style>
+
+    <style name="SearchView" parent="MatchParent">
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:inputType">text</item>
+        <item name="android:padding">@dimen/distance_8x</item>
+        <item name="android:background">@null</item>
+    </style>
 </resources>

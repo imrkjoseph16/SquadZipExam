@@ -9,15 +9,16 @@ import com.imrkjoseph.squadzipexam.app.shared.dto.ListItemViewDto
 import com.imrkjoseph.squadzipexam.app.shared.dto.SearchItemViewDto
 import com.imrkjoseph.squadzipexam.app.shared.dto.SpaceItemViewDto
 import com.imrkjoseph.squadzipexam.app.shared.dto.TitleItemViewDto
+import com.imrkjoseph.squadzipexam.app.shared.extension.highlightText
 import com.imrkjoseph.squadzipexam.contacts.data.dto.ContactListResponse
 import com.imrkjoseph.squadzipexam.contacts.data.dto.Data
 import javax.inject.Inject
 
 class ContactListFactory @Inject constructor() {
 
-    fun createOverview(data: ContactListResponse) = data.prepareList()
+    fun createOverview(data: ContactListResponse, searchKey: String) = data.prepareList(searchKey)
 
-    private fun ContactListResponse.prepareList() = buildList {
+    private fun ContactListResponse.prepareList(searchKey: String) = buildList {
         // Title
         add(element = SpaceItemViewDto(R.dimen.distance_20x))
         add(element = setupSectionTitle(textRes = R.string.title_contacts, textSize = 32F))
@@ -28,10 +29,10 @@ class ContactListFactory @Inject constructor() {
 
         // Contact List
         add(element = SpaceItemViewDto(R.dimen.distance_16x))
-        setupContactList(data = data)
+        setupContactList(data = data, searchKey = searchKey)
     }
 
-    private fun MutableList<Any>.setupContactList(data: List<Data>?) {
+    private fun MutableList<Any>.setupContactList(data: List<Data>?, searchKey: String) {
         if (data?.isEmpty() == true) add(element = EmptyItemViewDto(textRes = R.string.title_empty_contacts))
         else data?.sortedBy { it.firstName }?.map { details ->
             // Alphabetical Letter
@@ -41,7 +42,7 @@ class ContactListFactory @Inject constructor() {
             add(element = ContactListItem(
                 id = details.id,
                 dto = ListItemViewDto(
-                    firstLine = "${details.firstName} ${details.lastName}",
+                    spanString = "${details.firstName} ${details.lastName}".highlightText(highlightText = searchKey),
                     secondLine = details.email,
                     avatarUrl = details.avatar,
                     itemId = details.id

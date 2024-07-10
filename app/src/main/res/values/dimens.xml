@@ -17,4 +17,7 @@
 
     <dimen name="widget_loading_width">40dp</dimen>
     <dimen name="widget_loading_height">40dp</dimen>
+
+    <dimen name="arrow_back_width">28dp</dimen>
+    <dimen name="arrow_back_height">28dp</dimen>
 </resources>

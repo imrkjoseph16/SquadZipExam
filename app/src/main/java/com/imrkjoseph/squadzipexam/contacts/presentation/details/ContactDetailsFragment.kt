@@ -2,6 +2,7 @@ package com.imrkjoseph.squadzipexam.contacts.presentation.details
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.imrkjoseph.squadzipexam.app.foundation.BaseFragment
 import com.imrkjoseph.squadzipexam.contacts.presentation.list.GetContactDetails
 import com.imrkjoseph.squadzipexam.databinding.FragmentContactDetailsBinding
@@ -16,7 +17,16 @@ class ContactDetailsFragment : BaseFragment<FragmentContactDetailsBinding>(bindi
 
     override fun onViewCreated() {
         super.onViewCreated()
-        setupObserver()
+        with(binding) {
+            setupComponents()
+            setupObserver()
+        }
+    }
+
+    private fun FragmentContactDetailsBinding.setupComponents() {
+        arrowBack.setOnClickListener {
+            goBackToPreviousScreen()
+        }
     }
 
     private fun setupObserver() {
@@ -31,4 +41,6 @@ class ContactDetailsFragment : BaseFragment<FragmentContactDetailsBinding>(bindi
             }
         }
     }
+
+    private fun goBackToPreviousScreen() = findNavController().popBackStack()
 }

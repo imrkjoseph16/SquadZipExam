@@ -16,8 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ContactListVIewModel @Inject constructor(
-    private val contactUseCase: ContactUseCase,
     private val factory: ContactListFactory,
+    private val contactUseCase: ContactUseCase,
     private val databaseUseCase: DatabaseUseCase
 ) : ViewModel() {
 
@@ -72,15 +72,9 @@ class ContactListVIewModel @Inject constructor(
         )
     }
 
-    fun getUiItems(response: ContactListResponse) {
-        factory.createOverview(data = response).also { uiItems ->
-            updateUiState(state = GetUiItems(uiItems = uiItems))
-        }
-    }
-
     fun searchContacts(searchKey: String) {
         val queryResult = cachedContactList.filter {
-            it.firstName?.first()?.lowercase().toString() == searchKey
+            ("${it.firstName} ${it.lastName}").lowercase().contains(searchKey.lowercase())
         }
 
         val result = ContactListResponse(
@@ -88,7 +82,13 @@ class ContactListVIewModel @Inject constructor(
             else queryResult
         )
 
-        getUiItems(response = result)
+        getUiItems(response = result, searchKey = searchKey)
+    }
+
+    fun getUiItems(response: ContactListResponse, searchKey: String = "") {
+        factory.createOverview(data = response, searchKey = searchKey).also { uiItems ->
+            updateUiState(state = GetUiItems(uiItems = uiItems))
+        }
     }
 
     private fun updateUiState(state: ContactState) {

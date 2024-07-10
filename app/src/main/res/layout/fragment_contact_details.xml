@@ -20,17 +20,26 @@
         android:paddingHorizontal="@dimen/distance_16x"
         tools:context=".contacts.presentation.details.ContactDetailsFragment">
 
+        <ImageView
+            android:id="@+id/arrow_back"
+            android:layout_width="@dimen/arrow_back_width"
+            android:layout_height="@dimen/arrow_back_height"
+            android:layout_marginTop="@dimen/distance_20x"
+            android:background="@drawable/icon_arrow_back_24px"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/title_contact_details"
-            android:textSize="24sp"
             android:layout_marginTop="@dimen/distance_20x"
+            android:text="@string/title_contact_details"
             android:textAlignment="center"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/arrow_back" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/avatar_image"
