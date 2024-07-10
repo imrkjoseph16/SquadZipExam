@@ -29,7 +29,10 @@ class ContactListFactory @Inject constructor() {
 
     private fun MutableList<Any>.setupContactList(data: List<Data>?) {
         if (data?.isEmpty() == true) add(element = EmptyItemViewDto(textRes = R.string.title_empty_contacts))
-        else data?.map { details ->
+        else data?.sortedBy { it.firstName }?.map { details ->
+            // Alphabetical Letter
+            setupAlphabeticalLetters(details.firstName?.first().toString())
+
             // Details
             add(element = ContactListItem(
                 id = details.id,
@@ -41,6 +44,11 @@ class ContactListFactory @Inject constructor() {
                 )
             ))
         }
+    }
+
+    private fun MutableList<Any>.setupAlphabeticalLetters(letter: String) {
+        val alphabeticalOrderItem = setupSectionTitle(text = letter, textSize = 18F)
+        if (this.contains(alphabeticalOrderItem).not()) add(element = alphabeticalOrderItem)
     }
 
     private fun setupSectionTitle(
