@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.imrkjoseph.squadzipexam.R"/>
+
+        <variable
+            name="details"
+            type="com.imrkjoseph.squadzipexam.contacts.data.dto.ContactDetailsResponse" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/MatchParent"
+        android:paddingHorizontal="@dimen/distance_16x"
+        tools:context=".contacts.presentation.details.ContactDetailsFragment">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/title_contact_details"
+            android:textSize="24sp"
+            android:layout_marginTop="@dimen/distance_20x"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar_image"
+            android:layout_width="@dimen/contact_details_avatar_width"
+            android:layout_height="@dimen/contact_details_avatar_height"
+            android:layout_marginTop="@dimen/distance_18x"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            bind:loadUrl="@{details.data.avatar}" />
+
+        <TextView
+            android:id="@+id/first_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text='@{context.getString(R.string.title_first_name) + " " + details.data.firstName}'
+            android:textSize="20sp"
+            android:layout_marginTop="@dimen/distance_18x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/avatar_image" />
+
+        <TextView
+            android:id="@+id/last_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text='@{context.getString(R.string.title_last_name) + " " + details.data.lastName}'
+            android:textSize="20sp"
+            android:layout_marginTop="@dimen/distance_16x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/first_name" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text='@{context.getString(R.string.title_email) + " " + details.data.email}'
+            android:autoLink="email"
+            android:textSize="20sp"
+            android:layout_marginTop="@dimen/distance_16x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/last_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

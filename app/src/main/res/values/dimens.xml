@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="distance_0x">0dp</dimen>
+    <dimen name="distance_6x">6dp</dimen>
+    <dimen name="distance_8x">8dp</dimen>
+    <dimen name="distance_10x">10dp</dimen>
+    <dimen name="distance_12x">12dp</dimen>
+    <dimen name="distance_16x">16dp</dimen>
+    <dimen name="distance_18x">18dp</dimen>
+    <dimen name="distance_20x">20dp</dimen>
+
+    <dimen name="contact_list_avatar_width">60dp</dimen>
+    <dimen name="contact_list_avatar_height">60dp</dimen>
+
+    <dimen name="contact_details_avatar_width">150dp</dimen>
+    <dimen name="contact_details_avatar_height">150dp</dimen>
+
+    <dimen name="widget_loading_width">40dp</dimen>
+    <dimen name="widget_loading_height">40dp</dimen>
+</resources>
