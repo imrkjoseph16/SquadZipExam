@@ -2,9 +2,10 @@ package com.imrkjoseph.squadzipexam.contacts.presentation.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.imrkjoseph.squadzipexam.app.shared.extension.coRunCatching
 import com.imrkjoseph.squadzipexam.app.shared.local.domain.DatabaseUseCase
+import com.imrkjoseph.squadzipexam.app.shared.extension.coRunCatching
 import com.imrkjoseph.squadzipexam.contacts.data.dto.ContactListResponse
+import com.imrkjoseph.squadzipexam.contacts.data.dto.Data
 import com.imrkjoseph.squadzipexam.contacts.domain.ContactUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,6 +20,8 @@ class ContactListVIewModel @Inject constructor(
     private val factory: ContactListFactory,
     private val databaseUseCase: DatabaseUseCase
 ) : ViewModel() {
+
+    private var cachedContactList: List<Data> = emptyList()
 
     private val _uiState = MutableStateFlow(value = ContactState())
 
@@ -62,6 +65,7 @@ class ContactListVIewModel @Inject constructor(
     }
 
     private fun handleContactListResult(result: ContactListResponse) {
+        cachedContactList = result.data
         updateUiState(
             state = if (result.data.isEmpty()) ShowContactListNoData
             else GetContactList(response = result)
@@ -72,6 +76,19 @@ class ContactListVIewModel @Inject constructor(
         factory.createOverview(data = response).also { uiItems ->
             updateUiState(state = GetUiItems(uiItems = uiItems))
         }
+    }
+
+    fun searchContacts(searchKey: String) {
+        val queryResult = cachedContactList.filter {
+            it.firstName?.first()?.lowercase().toString() == searchKey
+        }
+
+        val result = ContactListResponse(
+            data = if (searchKey.isEmpty()) cachedContactList
+            else queryResult
+        )
+
+        getUiItems(response = result)
     }
 
     private fun updateUiState(state: ContactState) {

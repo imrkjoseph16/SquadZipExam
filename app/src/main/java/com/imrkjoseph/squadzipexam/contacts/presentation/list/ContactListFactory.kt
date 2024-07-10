@@ -6,6 +6,7 @@ import com.imrkjoseph.squadzipexam.app.component.TextLine
 import com.imrkjoseph.squadzipexam.app.shared.binder.ContactListItem
 import com.imrkjoseph.squadzipexam.app.shared.dto.EmptyItemViewDto
 import com.imrkjoseph.squadzipexam.app.shared.dto.ListItemViewDto
+import com.imrkjoseph.squadzipexam.app.shared.dto.SearchItemViewDto
 import com.imrkjoseph.squadzipexam.app.shared.dto.SpaceItemViewDto
 import com.imrkjoseph.squadzipexam.app.shared.dto.TitleItemViewDto
 import com.imrkjoseph.squadzipexam.contacts.data.dto.ContactListResponse
@@ -20,7 +21,10 @@ class ContactListFactory @Inject constructor() {
         // Title
         add(element = SpaceItemViewDto(R.dimen.distance_20x))
         add(element = setupSectionTitle(textRes = R.string.title_contacts, textSize = 32F))
+
+        // Search Widget
         add(element = SpaceItemViewDto(R.dimen.distance_16x))
+        add(element = SearchItemViewDto())
 
         // Contact List
         add(element = SpaceItemViewDto(R.dimen.distance_16x))

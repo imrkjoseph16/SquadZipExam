@@ -7,4 +7,6 @@
     <string name="title_last_name">Last name:</string>
     <string name="title_email">Email:</string>
     <string name="title_empty_contacts">No Contacts Found</string>
+
+    <string name="hint_search_contacts">Search Contacts…</string>
 </resources>

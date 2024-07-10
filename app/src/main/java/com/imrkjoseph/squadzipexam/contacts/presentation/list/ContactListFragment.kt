@@ -9,6 +9,7 @@ import com.imrkjoseph.squadzipexam.app.shared.binder.ContactListItem
 import com.imrkjoseph.squadzipexam.app.shared.binder.EmptyItemViewDtoBinder
 import com.imrkjoseph.squadzipexam.app.shared.binder.SpaceItemViewDtoBinder
 import com.imrkjoseph.squadzipexam.app.shared.binder.setupContactListItemBinder
+import com.imrkjoseph.squadzipexam.app.shared.binder.setupSearchItemBinder
 import com.imrkjoseph.squadzipexam.app.shared.binder.setupTitleItemBinder
 import com.imrkjoseph.squadzipexam.app.shared.extension.setVisible
 import com.imrkjoseph.squadzipexam.databinding.FragmentContactListBinding
@@ -37,6 +38,11 @@ class ContactListFragment : BaseFragment<FragmentContactListBinding>(FragmentCon
         addItemBindings(viewHolders = SpaceItemViewDtoBinder)
         addItemBindings(viewHolders = EmptyItemViewDtoBinder)
         addItemBindings(viewHolders = setupTitleItemBinder())
+        addItemBindings(viewHolders = setupSearchItemBinder(
+            onSearchKey = { query ->
+                viewModel.searchContacts(searchKey = query)
+            }
+        ))
         addItemBindings(viewHolders = setupContactListItemBinder(
             dtoRetriever = ContactListItem::dto,
             onItemClicked = { dto ->
